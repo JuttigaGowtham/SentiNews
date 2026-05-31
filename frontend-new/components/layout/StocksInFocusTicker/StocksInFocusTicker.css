@@ -1,0 +1,96 @@
+.stocks-focus-ticker {
+  height: 36px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 11px;
+}
+
+.stocks-focus-ticker__label {
+  background: var(--neon-cyan-dim);
+  color: var(--neon-cyan);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.02);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.stocks-focus-ticker__track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.stocks-focus-ticker__scroll {
+  display: flex;
+  width: max-content;
+  animation: stock-ticker-scroll 60s linear infinite;
+}
+
+@keyframes stock-ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.stock-ticker-item {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-right: 1px solid var(--border-subtle);
+  transition: background 0.2s;
+  height: 36px;
+}
+
+.stock-ticker-item:hover {
+  background: var(--bg-elevated);
+}
+
+.stock-logo-img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 8px;
+  background: #ffffff;
+  object-fit: contain;
+  padding: 1px;
+  flex-shrink: 0;
+  display: block;
+  border: 1px solid var(--border-subtle);
+}
+
+.stock-ticker-item__name {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.stock-ticker-item__price {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.stock-ticker-item__change {
+  font-weight: 600;
+}
+
+.stock-ticker-item__change.up { color: var(--neon-green); }
+.stock-ticker-item__change.down { color: var(--neon-red); }
+.stock-ticker-item__change.flat { color: var(--text-muted); }
+
+.stock-flash-up { background: rgba(16, 185, 129, 0.08); animation: flash-fade 0.7s; }
+.stock-flash-down { background: rgba(220, 38, 38, 0.08); animation: flash-fade 0.7s; }
+
+@keyframes flash-fade {
+  from { opacity: 1; }
+  to { opacity: 0.8; }
+}
