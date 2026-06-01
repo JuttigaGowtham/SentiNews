@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { fetchDailyNewsData } from '@/lib/api';
 import { 
-  FiCalendar as CalendarIcon, 
   FiRotateCw as RefreshIcon, 
   FiSearch as SearchIcon, 
   FiX as ClearIcon, 
@@ -45,9 +44,12 @@ function SkeletonLoader() {
   );
 }
 
-export default function DailyStockNewsPage() {
+function DailyStockNewsContent() {
+  const searchParams = useSearchParams();
+  const dateParam = searchParams.get('date');
+
   const [date, setDate] = useState(() => {
-    return new Date().toISOString().split('T')[0];
+    return dateParam || new Date().toISOString().split('T')[0];
   });
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,27 +61,43 @@ export default function DailyStockNewsPage() {
 
   const router = useRouter();
 
-  const fetchDailyNews = async (selectedDate) => {
-    setLoading(true);
-    setError(null);
+  const fetchDailyNews = async (selectedDate, isSilent = false) => {
+    if (!isSilent) {
+      setLoading(true);
+      setError(null);
+    }
     try {
       const data = await fetchDailyNewsData(selectedDate);
       setNews(data || []);
     } catch (err) {
       console.error(err);
-      setError("Unable to load daily stock news. Please try again.");
+      if (!isSilent) {
+        setError("Unable to load daily stock news. Please try again.");
+      }
     } finally {
-      setLoading(false);
+      if (!isSilent) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
-    fetchDailyNews(date);
-  }, [date]);
+    if (dateParam) {
+      setDate(dateParam);
+    }
+  }, [dateParam]);
 
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
+  useEffect(() => {
+    // Initial fetch (full load with skeleton loader)
+    fetchDailyNews(date, false);
+
+    // Auto-refresh every 30 seconds silently in the background
+    const intervalId = setInterval(() => {
+      fetchDailyNews(date, true);
+    }, 30_000);
+
+    return () => clearInterval(intervalId);
+  }, [date]);
 
   // Format the date for the header display
   const displayDate = new Date(date).toLocaleDateString("en-US", {
@@ -131,16 +149,6 @@ export default function DailyStockNewsPage() {
         </div>
         
         <div className="controls-new">
-          <div className="date-picker-wrapper-new">
-            <CalendarIcon size={16} className="picker-icon-new" />
-            <input
-              type="date"
-              value={date}
-              onChange={handleDateChange}
-              max={new Date().toISOString().split('T')[0]}
-              className="custom-date-input-new"
-            />
-          </div>
           <button 
             onClick={() => fetchDailyNews(date)}
             disabled={loading}
@@ -323,5 +331,13 @@ export default function DailyStockNewsPage() {
         </Link>
       </footer>
     </div>
+  );
+}
+
+export default function DailyStockNewsPage() {
+  return (
+    <Suspense fallback={<div className="stocks-news-container"><SkeletonLoader /></div>}>
+      <DailyStockNewsContent />
+    </Suspense>
   );
 }

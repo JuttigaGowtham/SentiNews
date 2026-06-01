@@ -4,47 +4,7 @@ import React, { useState } from "react";
 import { FiClock } from "react-icons/fi";
 
 const getAssetFlag = (name, symbol, type) => {
-  const n = name ? name.toLowerCase() : "";
-  const s = symbol ? symbol.toUpperCase() : "";
-  
-  if (type === "indices") {
-    if (n.includes("nifty") || n.includes("sensex") || n.includes("vix")) return "🇮🇳";
-    if (n.includes("s&p 500") || n.includes("dow jones") || n.includes("nasdaq") || s.includes("GSPC") || s.includes("DJI") || s.includes("IXIC") || s.includes("NDX") || s.includes("VIX")) return "🇺🇸";
-    if (n.includes("ftse 100")) return "🇬🇧";
-    if (n.includes("dax")) return "🇩🇪";
-    if (n.includes("cac 40")) return "🇫🇷";
-    if (n.includes("ibex 35") || s.includes("IBEX")) return "🇪🇸";
-    if (n.includes("nikkei")) return "🇯🇵";
-    if (n.includes("hang seng")) return "🇭🇰";
-    if (n.includes("china")) return "🇨🇳";
-    if (n.includes("msci") || n.includes("world") || s.includes("URTH")) return "🌐";
-    if (n.includes("tsx") || s.includes("TSX")) return "🇨🇦";
-    if (n.includes("bovespa") || s.includes("BVSP")) return "🇧🇷";
-    if (n.includes("ipc") || s.includes("MXX")) return "🇲🇽";
-    return "🌐";
-  }
-  
-  if (type === "currencies") {
-    if (n.includes("usd/inr") || s.includes("USDINR")) return "🇺🇸🇮🇳";
-    if (n.includes("eur/usd") || s.includes("EURUSD")) return "🇪🇺🇺🇸";
-    if (n.includes("gbp/usd") || s.includes("GBPUSD")) return "🇬🇧🇺🇸";
-    if (n.includes("usd/jpy") || s.includes("USDJPY")) return "🇺🇸🇯🇵";
-    if (n.includes("eur/inr") || s.includes("EURINR")) return "🇪🇺🇮🇳";
-    if (n.includes("gbp/inr") || s.includes("GBPINR")) return "🇬🇧🇮🇳";
-    if (n.includes("aud/usd") || s.includes("AUDUSD")) return "🇦🇺🇺🇸";
-    if (n.includes("usd/cad") || s.includes("USDCAD")) return "🇺🇸🇨🇦";
-    if (n.includes("usd/chf") || s.includes("USDCHF")) return "🇺🇸🇨🇭";
-    if (n.includes("nzd/usd") || s.includes("NZDUSD")) return "🇳🇿🇺🇸";
-    if (n.includes("gbp/eur") || s.includes("GBPEUR")) return "🇬🇧🇪🇺";
-    if (n.includes("eur/chf") || s.includes("EURCHF")) return "🇪🇺🇨🇭";
-    return "💱";
-  }
-  
-  if (type === "commodities") {
-    return "";
-  }
-  
-  return "📈";
+  return "";
 };
 
 export default function AssetTable({ assets, onSelect, type }) {
@@ -177,7 +137,14 @@ export default function AssetTable({ assets, onSelect, type }) {
           <td style={tdStyle}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {flag && <span style={{ fontSize: "1.15rem", display: "inline-flex", minWidth: "22px" }}>{flag}</span>}
-              <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+                {asset.tvSymbol && (
+                  <span style={{ fontSize: "0.65rem", color: "var(--neon-cyan)", fontFamily: "monospace", opacity: 0.8 }}>
+                    {asset.tvSymbol}
+                  </span>
+                )}
+              </div>
             </div>
           </td>
           <td style={tdTextAlignRight} className="price-num">
@@ -222,7 +189,14 @@ export default function AssetTable({ assets, onSelect, type }) {
           <td style={tdStyle}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               {flag && <span style={{ fontSize: "1.15rem", display: "inline-flex", minWidth: "22px" }}>{flag}</span>}
-              <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+                {asset.tvSymbol && (
+                  <span style={{ fontSize: "0.65rem", color: "var(--neon-cyan)", fontFamily: "monospace", opacity: 0.8 }}>
+                    {asset.tvSymbol}
+                  </span>
+                )}
+              </div>
             </div>
           </td>
           <td style={tdTextAlignRight} className={`price-num ${getPerfClass(asset.day_pct)}`}>
@@ -254,7 +228,14 @@ export default function AssetTable({ assets, onSelect, type }) {
         <td style={tdStyle}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {flag && <span style={{ fontSize: "1.15rem", display: "inline-flex", minWidth: "22px" }}>{flag}</span>}
-            <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{asset.name}</span>
+              {asset.tvSymbol && (
+                <span style={{ fontSize: "0.65rem", color: "var(--neon-cyan)", fontFamily: "monospace", opacity: 0.8 }}>
+                  {asset.tvSymbol}
+                </span>
+              )}
+            </div>
           </div>
         </td>
         <td style={tdTextAlignRight} className="price-num hide-mobile">

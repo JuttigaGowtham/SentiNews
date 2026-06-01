@@ -2,8 +2,7 @@
 
 const getHost = () => {
   if (typeof window === "undefined") return "127.0.0.1";
-  const hostname = window.location.hostname;
-  return hostname === "localhost" ? "127.0.0.1" : hostname;
+  return window.location.hostname;
 };
 // Update to use versioned API prefix
 // const BASE = process.env.NEXT_PUBLIC_API_URL || `http://${getHost()}:8000/api/v1`;
@@ -121,6 +120,8 @@ export const fetchDailyNewsData = (date) => request(`/market/daily-news?date=${d
 /* ── Market Reports ──────────────────────── */
 export const fetchPreMarketReport = () => request("/reports/pre-market");
 export const fetchPostMarketReport = () => request("/reports/post-market");
+export const fetchPreMarketIntel = () => request("/reports/pre-market-intel");
+export const fetchPostMarketIntel = () => request("/reports/post-market-intel");
 
 /* ── Screener ────────────────────────────── */
 export const fetchScreenerData = () => request("/screener");

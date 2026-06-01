@@ -57,15 +57,12 @@ COMMODITY_DEFS = [
     {"yf": "HO=F",   "td": "HEATING-OIL",   "name": "Heating Oil",    "category": "Energy",       "unit": "USD/Gal"},
     # Metals
     {"yf": "GC=F",   "td": "XAU",           "name": "Gold",            "category": "Metals",       "unit": "USD/oz"},
-    {"yf": "GOLDPETAL", "td": "XAU",        "name": "Gold Petal",      "category": "Metals",       "unit": "INR/g"},
     {"yf": "SI=F",   "td": "XAG",           "name": "Silver",          "category": "Metals",       "unit": "USD/oz"},
     {"yf": "PL=F",   "td": "XPT",           "name": "Platinum",        "category": "Metals",       "unit": "USD/oz"},
     {"yf": "PA=F",   "td": "XPD",           "name": "Palladium",       "category": "Metals",       "unit": "USD/oz"},
     {"yf": "HG=F",   "td": "HG",            "name": "Copper",          "category": "Metals",       "unit": "USD/lb"},
     {"yf": "ALI=F",  "td": "ALU",           "name": "Aluminium",       "category": "Metals",       "unit": "USD/T"},
     {"yf": "ZN=F",   "td": "ZINC",          "name": "Zinc",            "category": "Metals",       "unit": "USD/T"},
-    {"yf": "PB=F",   "td": "LEAD",          "name": "Lead",            "category": "Metals",       "unit": "USD/T"},
-    {"yf": "NI=F",   "td": "NICKEL",        "name": "Nickel",          "category": "Metals",       "unit": "USD/T"},
     # Agriculture
     {"yf": "ZW=F",   "td": "WHEAT",         "name": "Wheat",           "category": "Agriculture",  "unit": "USD/Bu"},
     {"yf": "ZC=F",   "td": "CORN",          "name": "Corn",            "category": "Agriculture",  "unit": "USD/Bu"},
@@ -74,10 +71,6 @@ COMMODITY_DEFS = [
     {"yf": "KC=F",   "td": "COFFEE",        "name": "Coffee",          "category": "Agriculture",  "unit": "USD/lb"},
     {"yf": "CT=F",   "td": "COTTON",        "name": "Cotton",          "category": "Agriculture",  "unit": "USD/lb"},
     {"yf": "CC=F",   "td": "COCOA",         "name": "Cocoa",           "category": "Agriculture",  "unit": "USD/T"},
-    {"yf": "SRU=F",  "td": "RUBBER",        "name": "Rubber",          "category": "Agriculture",  "unit": "USD/kg"},
-    {"yf": "GJS=F",  "td": "GUAR",          "name": "Guar Seed",       "category": "Agriculture",  "unit": "INR/Qt"},
-    {"yf": "MENTHA-F", "td": "MENTHA",       "name": "Mentha Oil",      "category": "Agriculture",  "unit": "INR/kg"},
-    {"yf": "KAPAS.NS", "td": "KAPAS",        "name": "Kapas",           "category": "Agriculture",  "unit": "INR/20kg"},
 ]
 
 CURRENCY_DEFS = [

@@ -30,6 +30,8 @@ import {
 
 const NAV_TABS = [
   { id: "market", href: "/market", label: "Market Pulse", icon: Newspaper },
+  { id: "pre-market", href: "/market/pre-market", label: "Pre-Market Intel", icon: TrendingUp },
+  { id: "post-market", href: "/market/post-market", label: "Post-Market Intel", icon: ClipboardList },
   { id: "daily-news", href: "/market/daily-news", label: "Stocks in News", icon: Calendar },
   // { id: "screener", href: "/screener", label: "Screener", icon: Sliders },
   { id: "reports", href: "/reports", label: "Reports", icon: ClipboardList },

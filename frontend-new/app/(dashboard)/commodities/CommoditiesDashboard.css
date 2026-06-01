@@ -233,20 +233,66 @@
   font-family: inherit;
 }
 
-/* Analysis Chart Popup Styles (Desktop Defaults) */
-.analysis-chart-popup {
-  width: 700px;
-  height: 600px;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-md);
+/* Terminal Workspace Layout - Side-by-Side Table & News */
+.terminal-workspace {
   display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
+  gap: 20px;
+  width: 100%;
+  margin-top: 1.5rem;
 }
 
-/* Mobile responsiveness updates */
+.terminal-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column 1: Asset Table (major width) */
+.assets-column {
+  flex: 7;
+  min-width: 0;
+}
+
+/* Column 2: Bloomberg News Feed (minor width) */
+.news-column {
+  flex: 5;
+  min-width: 0;
+}
+
+/* Make news feed and asset table containers scrollable internally */
+.news-terminal-list {
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.widget-content {
+  max-height: 550px;
+  overflow-y: auto;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* Responsive updates for tablet & mobile */
+@media (max-width: 992px) {
+  /* Stacked 1-column layout: Table on top, News below */
+  .terminal-workspace {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .assets-column, .news-column {
+    flex: 1;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .widget-content {
+    max-height: 500px;
+  }
+
+  .news-terminal-list {
+    max-height: 400px;
+  }
+}
+
 @media (max-width: 768px) {
   .commodities-container {
     padding: 0.75rem 0.5rem 2rem;
@@ -280,19 +326,12 @@
   .hide-mobile {
     display: none !important;
   }
-  
-  /* Make grid item fit screen on mobile */
-  .grid-item-container {
-    height: auto !important;
-    min-height: 350px;
-  }
 
-  .analysis-chart-popup {
-    left: 2.5% !important;
-    top: 10% !important;
+  /* Make modal take almost full screen on mobile devices */
+  .chart-modal-content {
     width: 95% !important;
-    height: 80% !important;
-    max-height: 500px;
+    height: 90% !important;
+    max-height: 480px !important;
   }
 }
 
